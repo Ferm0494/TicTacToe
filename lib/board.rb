@@ -1,6 +1,5 @@
+# rubocop:disable Style/ClassVars
 class Board
-  @@positions
-
   def initialize()
     @@positions = (1..9).to_a
   end
@@ -21,8 +20,5 @@ class Board
   def positions
     @@positions
   end
-
-  # def push(index)
-  #     @@positions[index]=
-  # end
 end
+# rubocop:enable Style/ClassVars

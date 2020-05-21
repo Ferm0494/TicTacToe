@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 # rubocop:disable Style/GlobalVars, Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity, Metrics/MethodLength
 require 'colorize'
-require_relative '../lib/Board'
-require_relative '../lib/Win'
+require_relative '../lib/board'
+require_relative '../lib/win'
 
 $exit = 0
 $winner = 0

@@ -1,7 +1,8 @@
+# rubocop:disable Style/ClassVars, Metrics/AbcSize, Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
+
 class Win
-  def initialize(ar)
-    @@positions = ar
-    # @@champ = nil
+  def initialize(arr)
+    @@positions = arr
   end
 
   def win?()
@@ -26,3 +27,4 @@ class Win
     end
   end
 end
+# rubocop:enable Style/ClassVars, Metrics/AbcSize, Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
