@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# rubocop:disable Style/GlobalVars, Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity, Metrics/MethodLength
 require 'colorize'
 
 $positions = (1..9).to_a
@@ -17,40 +18,36 @@ def board()
   puts "\n#{$positions[6]} | #{$positions[7]}  | #{$positions[8]} \n \n"
 end
 
-def get_inputs()
+def user_input()
+  puts 'Choose position from [1-9]'
   if $player1
     puts 'Player1:'.blue
-    puts 'Put position from [1-9]'
   else
     puts 'Player2:'.light_magenta
-    puts 'Put position from [1-9]'
   end
 
   x = gets.chomp.to_i
   system 'clear'
+
   if x.is_a? Numeric and $positions.include? x
     if $player1
       if $positions[x - 1].is_a?(Numeric)
         $count += 1
         $positions[x - 1] = 'X'.green
         $player1 = !$player1
-        end
-    else
-      if $positions[x - 1].is_a?(Numeric)
-        $count += 1
-        $positions[x - 1] = 'O'.yellow
-        $player1 = !$player1
-        end
+      end
+    elsif $positions[x - 1].is_a?(Numeric)
+      $count += 1
+      $positions[x - 1] = 'O'.yellow
+      $player1 = !$player1
     end
 
-  elsif x < 0
+  elsif x.negative?
     $exit = 1
+  elsif $positions[x - 1].eql?('X'.green) or $positions[x - 1].eql?('O'.yellow)
+    puts 'Position already taken please try another one!'.red
   else
-    if $positions[x - 1].eql?('X'.green) or $positions[x - 1].eql?('O'.yellow)
-      puts 'Position already taken please try another one!'.red
-    else
-      puts 'Wrong input'.red
-    end
+    puts 'Wrong input'.red
   end
 end
 
@@ -58,8 +55,9 @@ def start_game()
   puts "Positions size : #{$positions.size}"
   while $exit.eql? 0 and $winner.eql? 0 and !$count.eql? $positions.size
     board
-    get_inputs
+    user_input
   end
 end
 
 start_game
+# rubocop:enable Style/GlobalVars, Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity, Metrics/MethodLength
