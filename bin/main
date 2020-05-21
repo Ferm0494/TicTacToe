@@ -1,22 +1,15 @@
 #!/usr/bin/env ruby
 # rubocop:disable Style/GlobalVars, Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity, Metrics/MethodLength
 require 'colorize'
+require_relative '../lib/Board'
+require_relative '../lib/Win'
 
-$positions = (1..9).to_a
 $exit = 0
 $winner = 0
 $player1 = true
 $player2 = false
 $count = 0
-
-def board()
-  puts ":-----TICTACTOE-----: \n \n"
-  puts "#{$positions[0]} | #{$positions[1]}  | #{$positions[2]} \n \n"
-  puts '==========='
-  puts "\n#{$positions[3]} | #{$positions[4]}  | #{$positions[5]} \n \n"
-  puts '==========='
-  puts "\n#{$positions[6]} | #{$positions[7]}  | #{$positions[8]} \n \n"
-end
+$board = Board.new
 
 def user_input()
   puts 'Choose position from [1-9]'
@@ -29,71 +22,47 @@ def user_input()
   x = gets.chomp.to_i
   system 'clear'
 
-  if x.is_a? Numeric and $positions.include? x
+  if x.is_a? Numeric and $board.positions.include? x
     if $player1
-      if $positions[x - 1].is_a?(Numeric)
+      if $board.positions[x - 1].is_a?(Numeric)
         $count += 1
-        $positions[x - 1] = 'X'.green
-        player1 = win?
+        $board.push(x - 1, 'X'.green)
+        player1 = Win.new($board.positions)
+        player1 = player1.win?
         if player1
           $winner = 1
-          puts "player 1 wins"
+          puts 'Player 1 wins'.red
         end
         $player1 = !$player1
       end
-    elsif $positions[x - 1].is_a?(Numeric)
+    elsif $board.positions[x - 1].is_a?(Numeric)
       $count += 1
-      $positions[x - 1] = 'O'.yellow
-      player2 = win?
+      $board.push(x - 1, 'O'.yellow)
+      player2 = Win.new($board.positions)
+      player2 = player2.win?
+
       if player2
         $winner = 1
-        puts "player 2 wins"
+        puts 'Player 2 wins'.red
       end
       $player1 = !$player1
     end
 
   elsif x.negative?
     $exit = 1
-  elsif $positions[x - 1].eql?('X'.green) or $positions[x - 1].eql?('O'.yellow)
+  elsif $board.positions[x - 1].eql?('X'.green) or $board.positions[x - 1].eql?('O'.yellow)
     puts 'Position already taken please try another one!'.red
   else
     puts 'Wrong input'.red
   end
 end
 
-def win?()
-  case $positions
-  #horizontal
-  if ($positions[0].eql? $positions[1]) and ($positions[1].eql? $positions[2])
-    return  true
-  elsif $positions[3].eql? ($positions[4] and ($positions[5]))
-    return  true
-  elsif $positions[6].eql? ($positions[7] and ($positions[8]))
-    return  true
-
-  #vertical
-  elsif $positions[0].eql? ($positions[3] and ($positions[6]))
-    return  true
-  elsif $positions[1].eql? ($positions[4] and ($positions[7]))
-    return  true
-  elsif $positions[2].eql? ($positions[5] and ($positions[8]))
-    return  true
-
-  #diagonal
-  elsif $positions[0].eql? ($positions[4] and ($positions[8]))
-    return  true
-  elsif $positions[2].eql? ($positions[4] and ($positions[6]))
-    return  true
-  else return false
-  end
-end
-
 def start_game()
-  puts "Positions size : #{$positions.size}"
-  while $exit.eql? 0 and $winner.eql? 0 and !$count.eql? $positions.size
-    board
+  while $exit.eql? 0 and $winner.eql? 0 and !$count.eql? $board.positions.size
+    $board.show_board
     user_input
   end
+  puts 'DRAW!'.green if $count.eql? $board.positions.size and $winner.eql? 0
 end
 
 start_game
