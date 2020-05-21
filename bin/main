@@ -34,11 +34,21 @@ def user_input()
       if $positions[x - 1].is_a?(Numeric)
         $count += 1
         $positions[x - 1] = 'X'.green
+        player1 = win?
+        if player1
+          $winner = 1
+          puts "player 1 wins"
+        end
         $player1 = !$player1
       end
     elsif $positions[x - 1].is_a?(Numeric)
       $count += 1
       $positions[x - 1] = 'O'.yellow
+      player2 = win?
+      if player2
+        $winner = 1
+        puts "player 2 wins"
+      end
       $player1 = !$player1
     end
 
@@ -48,6 +58,33 @@ def user_input()
     puts 'Position already taken please try another one!'.red
   else
     puts 'Wrong input'.red
+  end
+end
+
+def win?()
+  case $positions
+  #horizontal
+  if ($positions[0].eql? $positions[1]) and ($positions[1].eql? $positions[2])
+    return  true
+  elsif $positions[3].eql? ($positions[4] and ($positions[5]))
+    return  true
+  elsif $positions[6].eql? ($positions[7] and ($positions[8]))
+    return  true
+
+  #vertical
+  elsif $positions[0].eql? ($positions[3] and ($positions[6]))
+    return  true
+  elsif $positions[1].eql? ($positions[4] and ($positions[7]))
+    return  true
+  elsif $positions[2].eql? ($positions[5] and ($positions[8]))
+    return  true
+
+  #diagonal
+  elsif $positions[0].eql? ($positions[4] and ($positions[8]))
+    return  true
+  elsif $positions[2].eql? ($positions[4] and ($positions[6]))
+    return  true
+  else return false
   end
 end
 
