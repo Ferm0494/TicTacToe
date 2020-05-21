@@ -2,7 +2,7 @@
 
 $positions=(1..9).to_a
 $exit = 0
-$winner = 0 
+$winner = 0
 def board()
     puts ":-----TICTACTOE-----: \n \n"
     puts "#{$positions[0]} | #{$positions[1]}  | #{$positions[2]} \n \n"
@@ -10,31 +10,31 @@ def board()
     puts "\n#{$positions[3]} | #{$positions[4]}  | #{$positions[5]} \n \n"
     puts "==========="
     puts "\n#{$positions[6]} | #{$positions[7]}  | #{$positions[8]} \n \n"
-    
+
 
 
 end
 
 def get_inputs()
-    
+
     puts "Put position from [1-9]"
-     x=gets.chomp
-    
-    if x.is_a? Numeric and $positions.include?(x)
+     x=gets.chomp.to_i
+
+    if x.is_a? Numeric and $positions.include? x
         puts "True"
-    elsif x.eql? 'c'
+    elsif x < 0
         $exit = 1
     else
         puts "Wrong input"
-        
+
     end
 end
 
 def start_game()
     count = 0
     puts "Positions size : #{$positions.size}"
-    while $exit.eql? 0 or $winner.eql? 0 or ! count.eql? $positions.size
-        system "clear"
+    while $exit.eql? 0 and $winner.eql? 0 and ! count.eql? $positions.size
+        #system "clear"
         board()
         get_inputs()
     end
