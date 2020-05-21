@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 
 $positions=(1..9).to_a
+$exit = 0
+$winner = 0 
 def board()
     puts ":-----TICTACTOE-----: \n \n"
     puts "#{$positions[0]} | #{$positions[1]}  | #{$positions[2]} \n \n"
@@ -13,4 +15,29 @@ def board()
 
 end
 
-board()
+def get_inputs()
+    
+    puts "Put position from [1-9]"
+     x=gets.chomp
+    
+    if x.is_a? Numeric and $positions.include?(x)
+        puts "True"
+    elsif x.eql? 'c'
+        $exit = 1
+    else
+        puts "Wrong input"
+        
+    end
+end
+
+def start_game()
+    count = 0
+    puts "Positions size : #{$positions.size}"
+    while $exit.eql? 0 or $winner.eql? 0 or ! count.eql? $positions.size
+        system "clear"
+        board()
+        get_inputs()
+    end
+end
+
+start_game()
