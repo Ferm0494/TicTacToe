@@ -1,10 +1,12 @@
 #!/usr/bin/env ruby
+require 'colorize'
 
 $positions=(1..9).to_a
 $exit = 0
 $winner = 0
 $player1 = true
 $player2 = false
+$count = 0
 
 
 def board()
@@ -21,24 +23,26 @@ end
 
 def get_inputs()
     if $player1
-        puts "player1"
+        puts "Player1:".blue
         puts "Put position from [1-9]"
     else
-        puts "player2"
+        puts "Player2:".light_magenta
         puts "Put position from [1-9]"
     end
+    
      x=gets.chomp.to_i
-
+     system "clear"
     if x.is_a? Numeric and $positions.include? x
-        puts "True"
         if $player1
-            unless $position[x].is_a?(Numeric)
-              $position[x] = "X"
+            if $positions[x-1].is_a?(Numeric)
+                $count +=1
+              $positions[x-1] = "X".green
               $player1 = !$player1
             end
         else
-            unless $position[x].is_a?(Numeric)
-              $position[x] = "O"
+            if $positions[x-1].is_a?(Numeric)
+            $count +=1
+              $positions[x-1] = "O".yellow
               $player1 = !$player1
             end
         end
@@ -46,16 +50,19 @@ def get_inputs()
     elsif x < 0
         $exit = 1
     else
-        puts "Wrong input"
+        if $positions[x-1].eql?('X'.green) or $positions[x-1].eql?('O'.yellow) 
+                puts "Position already taken please try another one!".red
+        else
+        puts "Wrong input".red
+        end
     end
 
 end
 
 def start_game()
-    count = 0
+    
     puts "Positions size : #{$positions.size}"
-    while $exit.eql? 0 and $winner.eql? 0 and ! count.eql? $positions.size
-        #system "clear"
+    while $exit.eql? 0 and $winner.eql? 0 and ! $count.eql? $positions.size
         board()
         get_inputs()
     end
