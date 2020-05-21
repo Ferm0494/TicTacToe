@@ -1,6 +1,7 @@
 class Win
   def initialize(ar)
     @@positions = ar
+    # @@champ = nil
   end
 
   def win?()
@@ -23,5 +24,5 @@ class Win
     else
       false
     end
-    end
+  end
 end

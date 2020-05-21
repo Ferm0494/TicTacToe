@@ -7,47 +7,44 @@ require_relative '../lib/Win'
 $exit = 0
 $winner = 0
 $player1 = true
-$player2 = false
 $count = 0
 $board = Board.new
+$current_player = 1
 
-def user_input()
+def player()
   puts 'Choose position from [1-9]'
   if $player1
     puts 'Player1:'.blue
   else
     puts 'Player2:'.light_magenta
   end
+end
 
+def who_won(index)
+  $winner = 1
+  puts "Player #{index} wins".red
+end
+
+def user_input()
+  player
   x = gets.chomp.to_i
   system 'clear'
-
   if x.is_a? Numeric and $board.positions.include? x
-    if $player1
-      if $board.positions[x - 1].is_a?(Numeric)
-        $count += 1
-        $board.push(x - 1, 'X'.green)
-        player1 = Win.new($board.positions)
-        player1 = player1.win?
-        if player1
-          $winner = 1
-          puts 'Player 1 wins'.red
-        end
-        $player1 = !$player1
-      end
+    if $player1 and $board.positions[x - 1].is_a?(Numeric)
+      $count += 1
+      $board.push(x - 1, 'X'.green)
+      player1 = Win.new($board.positions)
+      return who_won(1) if player1.win?
+
+      $player1 = !$player1
     elsif $board.positions[x - 1].is_a?(Numeric)
       $count += 1
       $board.push(x - 1, 'O'.yellow)
       player2 = Win.new($board.positions)
-      player2 = player2.win?
+      return who_won(2) if player2.win?
 
-      if player2
-        $winner = 1
-        puts 'Player 2 wins'.red
-      end
       $player1 = !$player1
     end
-
   elsif x.negative?
     $exit = 1
   elsif $board.positions[x - 1].eql?('X'.green) or $board.positions[x - 1].eql?('O'.yellow)
