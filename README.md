@@ -15,7 +15,7 @@
 - Download the repo and navigate to the folder bin.
 - Open the terminal on bin folder and type `ruby main`
 - Make sure to put only inputs from [1-9]
-- You can type  ANY `NEGATIVE NUMBERS` in order to finish the program.
+- You can type  ANY `NEGATIVE NUMBERS` in order to quit the program.
 
 ## Authors
 
