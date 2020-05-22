@@ -2,9 +2,9 @@
 
 > Tictactoe Game
 
-![screenshot](./assets/img/1.png)
-![screenshot](./assets/img/2.png)
-![screenshot](./assets/img/3.png)
+![screenshot](./img/1.png)
+![screenshot](./img/2.png)
+![screenshot](./img/3.png)
 
 ## Built With
 
