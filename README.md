@@ -1,6 +1,6 @@
 # Tictactoe
 
-> In this project we built the Tictactoe game. The main goal was to put into practice the concept of OOP.
+> Tictactoe Game
 
 ![screenshot](./img/1.png)
 ![screenshot](./img/2.png)
@@ -13,9 +13,10 @@
 ## Getting Started
 
 - Download the repo and navigate to the folder bin.
+- Make sure you type `bundle install` to install dependencies
 - Open the terminal on bin folder and type `ruby main`
 - Make sure to put only inputs from [1-9]
-- You can type  ANY `NEGATIVE NUMBERS` in order to quit the program.
+- You can type  ANY `NEGATIVE NUMBERS` in order to finish the program.
 
 ## Authors
 
@@ -30,7 +31,7 @@
 - Email: [ajuzepaul@gmail.com](ajuzepaul@gmail.com)
 - Github: [@misterpaul4](https://github.com/misterpaul4)
 - Twitter: [@paulajuze](https://twitter.com/paulajuze)
-- Linkedin: [@Chukwuebuka Paul Ajuizeogu](https://www.linkedin.com/in/chukwuebuka-paul-ajuizeogu/)
+- Linkedin: [Chukwuebuka Paul Ajuizeogu](https://www.linkedin.com/in/chukwuebuka-paul-ajuizeogu/)
 
 ## 🤝 Contributing
 
