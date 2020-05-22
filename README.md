@@ -1,6 +1,6 @@
 # Tictactoe
 
-> Tictactoe Game
+> In this project we built the Tictactoe game. The main goal was to put into practice the concept of OOP.
 
 ![screenshot](./img/1.png)
 ![screenshot](./img/2.png)
@@ -30,7 +30,7 @@
 - Email: [ajuzepaul@gmail.com](ajuzepaul@gmail.com)
 - Github: [@misterpaul4](https://github.com/misterpaul4)
 - Twitter: [@paulajuze](https://twitter.com/paulajuze)
-- Linkedin: [Chukwuebuka Paul Ajuizeogu] (https://www.linkedin.com/in/chukwuebuka-paul-ajuizeogu/)
+- Linkedin: [@Chukwuebuka Paul Ajuizeogu](https://www.linkedin.com/in/chukwuebuka-paul-ajuizeogu/)
 
 ## 🤝 Contributing
 
