@@ -57,6 +57,7 @@ def start_game()
     board
     user_input
   end
+  puts 'Game over!'.cyan
 end
 
 start_game
