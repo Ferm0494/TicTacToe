@@ -1,2 +1,65 @@
 #!/usr/bin/env ruby
-puts "Hello world 3"
+# rubocop:disable Style/GlobalVars, Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity, Metrics/MethodLength
+require 'colorize'
+
+$positions = (1..9).to_a
+$exit = 0
+$winner = 0
+$player1 = true
+$player2 = false
+$count = 0
+
+def board()
+  puts ":-----TICTACTOE-----: \n \n"
+  puts "#{$positions[0]} | #{$positions[1]}  | #{$positions[2]} \n \n"
+  puts '==========='
+  puts "\n#{$positions[3]} | #{$positions[4]}  | #{$positions[5]} \n \n"
+  puts '==========='
+  puts "\n#{$positions[6]} | #{$positions[7]}  | #{$positions[8]} \n \n"
+end
+
+def user_input()
+  puts 'Choose position from [1-9]'
+  if $player1
+    puts 'Player1:'.blue
+  else
+    puts 'Player2:'.light_magenta
+  end
+
+  x = gets.chomp.to_i
+  system 'clear'
+
+  if x.is_a? Numeric and $positions.include? x
+    if $player1
+      if $positions[x - 1].is_a?(Numeric)
+        $count += 1
+        $positions[x - 1] = 'X'.green
+        $player1 = !$player1
+      end
+    elsif $positions[x - 1].is_a?(Numeric)
+      $count += 1
+      $positions[x - 1] = 'O'.yellow
+      $player1 = !$player1
+    end
+
+  elsif x.negative?
+    $exit = 1
+  elsif $positions[x - 1].eql?('X'.green) or $positions[x - 1].eql?('O'.yellow)
+    puts 'Position already taken please try another one!'.red
+  else
+    puts 'Wrong input'.red
+  end
+end
+
+def start_game()
+  puts "Positions size : #{$positions.size}"
+  while $exit.eql? 0 and $winner.eql? 0 and !$count.eql? $positions.size
+    board
+    user_input
+  end
+  puts 'Checking for winner or draw...'.cyan
+  puts 'Game over!'.cyan
+end
+
+start_game
+# rubocop:enable Style/GlobalVars, Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity, Metrics/MethodLength
