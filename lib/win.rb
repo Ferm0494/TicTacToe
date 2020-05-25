@@ -1,8 +1,8 @@
 # rubocop:disable Metrics/AbcSize, Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
 
-class Win < Board
-  def initialize()
-    super
+class Win
+  def initialize(arr)
+    @positions = arr
   end
 
   def win?()
