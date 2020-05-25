@@ -33,14 +33,14 @@ def user_input()
     if $player1 and $board.positions[x - 1].is_a?(Numeric)
       $count += 1
       $board.push(x - 1, 'X'.green)
-      player1 = Win.new($board.positions)
+      player1 = Win.new
       return who_won(1) if player1.win?
 
       $player1 = !$player1
     elsif $board.positions[x - 1].is_a?(Numeric)
       $count += 1
       $board.push(x - 1, 'O'.yellow)
-      player2 = Win.new($board.positions)
+      player2 = Win.new
       return who_won(2) if player2.win?
 
       $player1 = !$player1
