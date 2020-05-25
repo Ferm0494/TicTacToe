@@ -60,6 +60,8 @@ def start_game()
     user_input
   end
   puts 'DRAW!'.green if $count.eql? $board.positions.size and $winner.eql? 0
+
+ 
 end
 
 start_game
