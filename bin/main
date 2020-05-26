@@ -4,62 +4,47 @@ require 'colorize'
 require_relative '../lib/board'
 require_relative '../lib/win'
 
-$exit = 0
-$winner = 0
-$player1 = true
-$count = 0
-$board = Board.new
-$current_player = 1
+$exit = false
 
-def player()
-  puts 'Choose position from [1-9]'
-  if $player1
-    puts 'Player1:'.blue
-  else
-    puts 'Player2:'.light_magenta
-  end
-end
-
-def who_won(index)
-  $winner = 1
-  puts "Player #{index} wins".red
-end
-
-def user_input()
-  player
+def user_input(count, player, board, winner)
+  puts board.player?(player) ? 'Player 1 turn!'.bold.green : 'Player 2 turn!'.bold.yellow
   x = gets.chomp.to_i
   system 'clear'
-  if x.is_a? Numeric and $board.positions.include? x
-    if $player1 and $board.positions[x - 1].is_a?(Numeric)
-      $count += 1
-      $board.push(x - 1, 'X'.green)
-      player1 = Win.new($board.positions)
-      return who_won(1) if player1.win?
-
-      $player1 = !$player1
-    elsif $board.positions[x - 1].is_a?(Numeric)
-      $count += 1
-      $board.push(x - 1, 'O'.yellow)
-      player2 = Win.new($board.positions)
-      return who_won(2) if player2.win?
-
-      $player1 = !$player1
+  res = board.validating_input?(x)
+  if res
+    if player
+      count = board.push(x - 1, 'X'.green, count)
+      player1 = Win.new
+      winner = board.who_won(1) if player1.win?(board.positions)
+      puts 'Player 1 wins'.red if winner
+    else
+      count = board.push(x - 1, 'O'.yellow, count)
+      player2 = Win.new
+      winner = board.who_won(2) if player2.win?(board.positions)
+      puts 'Player 2 wins'.red if winner
     end
+    player = board.change_player?(player)
   elsif x.negative?
-    $exit = 1
-  elsif $board.positions[x - 1].eql?('X'.green) or $board.positions[x - 1].eql?('O'.yellow)
+    $exit = true
+  elsif board.positions[x - 1].eql?('X'.green) or board.positions[x - 1].eql?('O'.yellow)
     puts 'Position already taken please try another one!'.red
   else
     puts 'Wrong input'.red
   end
+  [count, player, winner]
 end
 
 def start_game()
-  while $exit.eql? 0 and $winner.eql? 0 and !$count.eql? $board.positions.size
-    puts $board.show_board
-    user_input
+  count = 0
+  player1 = true
+  board = Board.new
+  winner = false
+  while !$exit and !winner and !count.eql? board.positions.size
+    puts board.show_board
+    p 'Choose position from [1-9]'
+    count, player1, winner = user_input(count, player1, board, winner)
   end
-  puts 'DRAW!'.green if $count.eql? $board.positions.size and $winner.eql? 0
+  puts 'DRAW!'.green if count.eql? board.positions.size
 end
 
 start_game

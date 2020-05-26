@@ -1,11 +1,8 @@
 # rubocop:disable Metrics/AbcSize, Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
 
 class Win
-  def initialize(arr)
+  def win?(arr)
     @positions = arr
-  end
-
-  def win?()
     if @positions[0].eql? @positions[1] and @positions[1].eql? @positions[2]
       true
     elsif @positions[3].eql? @positions[4] and @positions[4].eql? @positions[5]
