@@ -1,4 +1,4 @@
-# Tictactoe
+# Tictactoe Testing
 
 > Tictactoe Game
 
@@ -9,14 +9,14 @@
 ## Built With
 
 - Ruby
+- Tested with `rspec` 
 
-## Getting Started
+## Getting Started for testing
 
-- Download the repo and navigate to the folder bin.
-- Make sure you type `bundle install` to install dependencies
-- Open the terminal on bin folder and type `ruby main`
-- Make sure to put only inputs from [1-9]
-- You can type  ANY `NEGATIVE NUMBERS` in order to finish the program.
+- In order to test it make sure to install `rspec`.
+- Run command `bundle install`
+- Run command `rspec`
+- Testing cases for each class is on ***lib/*** folder. 
 
 ## Authors
 
