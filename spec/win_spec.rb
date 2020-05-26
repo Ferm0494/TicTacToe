@@ -4,7 +4,6 @@ require_relative '../lib/board'
 
 describe '#win?' do
   let(:win_combo) { Win.new }
-  # let(:board) { (1..9).to_a }
   let(:board) { Board.new }
 
   it "return true if there's a vertical winning combination" do

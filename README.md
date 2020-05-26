@@ -16,7 +16,7 @@
 - In order to test it make sure to install `rspec`.
 - Run command `bundle install`
 - Run command `rspec`
-- Testing cases for each class is on ***lib/*** folder. 
+- Testing cases for each class is on ***spec/*** folder. 
 
 ## Authors
 
