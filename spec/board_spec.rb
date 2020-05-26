@@ -1,4 +1,4 @@
-require './lib/board'
+require_relative '../lib/board'
 
 describe Board do
   board = Board.new
@@ -66,6 +66,18 @@ describe Board do
 
     it 'Gives error if no param is being sent..' do
       expect { board.change_player? }.to raise_error(ArgumentError)
+    end
+  end
+
+  describe '#push' do
+    it 'Positive case for : #push it returns a number when INDEX is between 0-8' do
+      expect(board.push(0, 'X', 0)).to be_an(Numeric)
+      expect(board.push(8, 'O', 1)).to be_an(Numeric)
+    end
+
+    it 'Negative case for : #push it returns a negative case when Index is not between 0-8' do
+      expect(board.push(10, 'X', 0)).to eql false
+      expect(board.push(-1, 'O', 1)).to eql false
     end
   end
 end

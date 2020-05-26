@@ -33,6 +33,9 @@ class Board
   end
 
   def push(index, value, count)
+    return false if index > 9
+    return false if index.negative?
+
     @positions[index] = value
     count + 1
   end
